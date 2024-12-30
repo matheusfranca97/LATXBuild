@@ -33,7 +33,11 @@
         productName: "LATX",
         productVersion: "1.0",
       }).then((unityInstance) => {
-        var testData = JSON.stringify({ ticketBalance: 3 });
+        var testData = JSON.stringify({ 
+          ticketBalance: 3, 
+          multiplierRemainingTime: 40, 
+          shipMultiplier: 8 
+        });
         unityInstance.SendMessage("BackendCommunicationManager", "ReceivePlayerData", testData);
       });
     </script>
