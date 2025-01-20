@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | LATX</title>
+    <title>Unity Web Player | LATX</title>
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" width="428" height="926" tabindex="-1" style="width: 428px; height: 926px; background: #231F20"></canvas>
-
+    <canvas id="unity-canvas" width=428 height=926 tabindex="-1" style="width: 428px; height: 926px; background: #231F20"></canvas>
     <script src="Build/LATX.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
         var meta = document.createElement('meta');
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
@@ -25,6 +25,7 @@
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
+        arguments: [],
         dataUrl: "Build/LATX.data",
         frameworkUrl: "Build/LATX.framework.js",
         codeUrl: "Build/LATX.wasm",
@@ -32,13 +33,8 @@
         companyName: "DefaultCompany",
         productName: "LATX",
         productVersion: "1.0",
-      }).then((unityInstance) => {
-        var testData = JSON.stringify({ 
-          ticketBalance: 3, 
-          multiplierRemainingTime: 40, 
-          shipMultiplier: 8 
-        });
-        unityInstance.SendMessage("BackendCommunicationManager", "ReceivePlayerData", testData);
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });
     </script>
   </body>
